@@ -1,0 +1,56 @@
+goal_state = {'A': 0, 'B': 0}
+cost = 0
+
+while goal_state['A'] == 0 or goal_state['B'] == 0:
+    vacuum_location = input("Enter the vacuum location (A or B): ")
+    status = int(input("Enter the status of the location (1 for dirty, 0 for clean): "))
+    alternate_loc = input("Enter the other location (A or B): ")
+    alternate_status = int(input("Enter the status of alternate location (1 for dirty, 0 for clean): "))
+
+    if vacuum_location == 'A':
+        if status == 1:
+            goal_state['A'] = 1
+            print("A is dirty")
+            cost += 1
+            print("A is sucked")
+            print("A is clean")
+        else:
+            print("A is already clean")
+        
+        if alternate_loc == 'B':
+            if alternate_status == 1:
+                goal_state['B'] = 1
+                print("B is dirty, moving right")
+                cost += 1
+                print("B is sucked")
+                print("B is clean")
+            else:
+                print("B is already clean")
+    
+    else:  # If vacuum_location is 'B'
+        if status == 1:
+            goal_state['B'] = 1
+            print("B is dirty")
+            cost += 1
+            print("B is sucked")
+            print("B is clean")
+        else:
+            print("B is already clean")
+
+        if alternate_loc == 'A':
+            if alternate_status == 1:
+                goal_state['A'] = 1
+                print("A is dirty, moving left")
+                cost += 1
+                print("A is sucked")
+                print("A is clean")
+            else:
+                print("A is already clean")
+    vacuum_location = input("Enter the vacuum location (A or B): ")
+    status = int(input("Enter the status of the location (1 for dirty, 0 for clean): "))
+    alternate_loc = input("Enter the other location (A or B): ")
+    alternate_status = int(input("Enter the status of alternate location (1 for dirty, 0 for clean): "))
+
+print("Total cost =", cost)
+
+
