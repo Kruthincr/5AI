@@ -1,0 +1,65 @@
+arr = [["-", "-", "-"], ["-", "-", "-"], ["-", "-", "-"]]
+players = ['X', 'O']
+n = 3
+
+def check_empty():
+    for row in arr:
+        for cell in row:
+            if cell == '-':
+                return True
+    return False
+
+def check_win():
+    # Check rows
+    for row in arr:
+        if row[0] == row[1] == row[2] != "-":
+            return True
+    
+    # Check columns
+    for col in range(n):
+        if arr[0][col] == arr[1][col] == arr[2][col] != "-":
+            return True
+    
+    # Check diagonals
+    if arr[0][0] == arr[1][1] == arr[2][2] != "-":
+        return True
+    if arr[0][2] == arr[1][1] == arr[2][0] != "-":
+        return True
+    
+    return False
+
+def check_indi(r, c):
+    return arr[r][c] == "-"
+
+def print_board():
+    for row in arr:
+        print(" | ".join(row))
+    print()
+
+def tic():
+    current_player = 0  # Start with player X
+    while True:
+        print_board()
+        r = int(input("Enter the row (0-2): "))
+        c = int(input("Enter the column (0-2): "))
+
+        if check_indi(r, c):
+            arr[r][c] = players[current_player]  # Place the player's mark
+            
+            if check_win():
+                print_board()
+                print(players[current_player], "wins!")
+                break
+            
+            if not check_empty():
+                print_board()
+                print("It's a draw!")
+                break
+            
+            # Switch players
+            current_player = 1 - current_player  # Toggle between 0 and 1
+        else:
+            print("Cell is already occupied, try again.")
+
+# Start the game
+tic()
